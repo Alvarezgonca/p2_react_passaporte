@@ -1,0 +1,13 @@
+.custom-icon-vsc {
+    color: black;
+    font-size: 50px;
+}
+
+.custom-icon-vsc:hover {
+    cursor: pointer;
+}
+
+.twitter {
+    color: #1da1f2;
+    font-size: 30px;
+}
