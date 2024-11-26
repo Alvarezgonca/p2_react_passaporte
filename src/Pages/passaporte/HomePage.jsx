@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 import './App.css';
-import {Link, Routes, Route} from 'react-router-dom';
-import Login from './Login';
+import {Link} from 'react-router-dom';
 import { VscAccount } from "react-icons/vsc";
-import { VscTwitter, VscInstagram, VscFacebook, VscYoutube } from "react-icons/vsc";
+import { VscTwitter } from "react-icons/vsc";
+import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
+import { BotaoLogin } from './Login';
+import { LinkEstilizado } from './Perfil';
 
 
-const StyledLink = styled(Link)`
+export const StyledLink = styled(Link)`
   text-decoration: none;
   color: #007bff;
   font-size: 1rem;
@@ -42,14 +44,14 @@ align-items: center;
 gap: 1rem;
 `;
 
-export const Botao = styled.button `
-background-color: #007bff;
-color: #fff;
-border: none;
-padding: 0.8rem 1.6rem;
-border-radius: 5px;
-cursor: pointer;
-`
+// export const Botao = styled.button `
+// background-color: #007bff;
+// color: #fff;
+// border: none;
+// padding: 0.8rem 1.6rem;
+// border-radius: 5px;
+// cursor: pointer;
+// `
 
 export const TituloH2 = styled.h2 `
 font-size: 1.3rem;
@@ -73,6 +75,10 @@ gap: 1.5rem;
 export const ContainerMainGrid = styled.div `
 display: grid;
 grid-template-columns: repeat(2, 50%);
+
+@media (max-width: 1050px) {
+  display: flex;
+}
 `
 
 export const ContainerMainGridEsquerda = styled.div `
@@ -118,6 +124,12 @@ background: linear-gradient(146deg, #0025b8,#031a77,#110066,#6f0107,#8a0000);
 display: grid;
 grid-template-columns: repeat(2, 50%);
 color: white;
+
+@media (max-width: 770px) {
+  display:flex;
+  flex-direction: column;
+  gap: 2rem;
+}
 `
 
 
@@ -154,6 +166,19 @@ display: flex;
 gap: 1rem;
 `
 
+export const IconeFooter = styled.a`
+  color: #007bff;
+  font-size: 1.5rem;
+  &:hover {
+    color: #0056b3;
+  }
+`;
+
+const Imagem = styled.img `
+@media (max-width: 1050px) {
+  display: none;
+}
+`
 
 
 
@@ -161,19 +186,25 @@ gap: 1rem;
 
 
 
-function Header() {
+export function Header() {
   return (
     <HeaderContainer>
       <HeaderEsquerda>
-        <img src='logoPassaporte.png' alt='Logo' width={70} />
-        <FlexColumn>
-          <TituloH2>Passaporte</TituloH2>
-          <TituloH2>Universitário</TituloH2>
-        </FlexColumn>
+        <div>
+          <LinkEstilizado to="/">
+            <HeaderEsquerda>
+              <img src='logoPassaporte.png' alt='Logo' width={70} />
+              <FlexColumn>
+                <TituloH2>Passaporte</TituloH2>
+                <TituloH2 >Universitário</TituloH2>
+              </FlexColumn>
+            </HeaderEsquerda>
+          </LinkEstilizado>
+        </div>
       </HeaderEsquerda>
       <HeaderDireita>
-        <StyledLink to='/login'><Botao>Faça seu login</Botao></StyledLink>
-        <VscAccount className="custom-icon-vsc"/>
+        <StyledLink to='/login'><BotaoLogin>Faça seu login</BotaoLogin></StyledLink>
+        <div><StyledLink to="/perfil"><VscAccount className="custom-icon-vsc"/></StyledLink></div>
       </HeaderDireita>
     </HeaderContainer>
   )
@@ -186,11 +217,11 @@ function Main() {
       <ContainerMainGrid>
           <ContainerMainGridEsquerda>
           <ParagrafoGrande>Venha participar do nosso programa de qualificação e formação acadêmico profissional.</ParagrafoGrande>
-          <Botao>Realizar Primeiro Cadastro</Botao>
+          <div><StyledLink to="/cadastro"><BotaoLogin>Realizar Primeiro Cadastro</BotaoLogin></StyledLink></div>
           <div><A href="https://passaporteuniversitario.marica.rj.gov.br/documentacao-necessaria" target="_blank">Acesse a documentação necessária</A></div>
           </ContainerMainGridEsquerda>
           <ContainerMainGridDireita>
-              <img src="foto_passaporte.jpeg" alt="passportianos" width={500} />
+              <Imagem src="foto_passaporte.jpeg" alt="passportianos" width={500} />
           </ContainerMainGridDireita>
       </ContainerMainGrid>
       <Gap1>
@@ -201,23 +232,23 @@ function Main() {
       <Gap1>
           <h2>Instituições Credenciadas:</h2>
           <p>Confira nossas Instituições Credenciadas e veja qual mais atende as suas necessidades.</p>
-          <div><StyledLink to="https://passaporteuniversitario.marica.rj.gov.br/instituicoes-credenciadas"><Botao>Conheça as instituições credenciadas</Botao></StyledLink></div>
+          <div><StyledLink target='_blank' to="https://passaporteuniversitario.marica.rj.gov.br/instituicoes-credenciadas"><BotaoLogin>Conheça as instituições credenciadas</BotaoLogin></StyledLink></div>
       </Gap1>
       <Gap1>
           <h2>Resultados:</h2>
           <p>Confira os resultados de cada disciplina do programa Passaporte Universitário.</p>
-          <div><StyledLink to="https://passaporteuniversitario.marica.rj.gov.br/resultados"><Botao>Verifique os resultados</Botao></StyledLink></div>
+          <div><StyledLink target='_blank' to="https://passaporteuniversitario.marica.rj.gov.br/resultados"><BotaoLogin>Verifique os resultados</BotaoLogin></StyledLink></div>
       </Gap1>
       <Gap1>
           <h2>Legislação</h2>
           <p>Confira toda a legislação do programa como leis, decretos, resoluções, portarias, editais, etc...</p>
-          <div><StyledLink to="https://passaporteuniversitario.marica.rj.gov.br/legislacao"><Botao>Acesse a legislação do programa</Botao></StyledLink></div>
+          <div><StyledLink target='_blank' to="https://passaporteuniversitario.marica.rj.gov.br/legislacao"><BotaoLogin>Acesse a legislação do programa</BotaoLogin></StyledLink></div>
       </Gap1>
     </ContainerMain>
   )
 }
 
-function Footer() {
+export function Footer() {
   return (
     <FooterContainer>
       <FooterEsquerdo>
@@ -225,7 +256,7 @@ function Footer() {
           <ParagrafoGrande>Secretaria de Ciência,</ParagrafoGrande>
           <ParagrafoGrande>Tecnologia e Formação.</ParagrafoGrande>
         </AlinharColumnCentro>
-        <img src="logo-footer.png" alt="Logo da Prefeitura de Maricá"/>
+        <img src="logo-footer-branco.png" alt="Logo da Prefeitura de Maricá"/>
         <A href=" www.marica.rj.gov.br"> www.marica.rj.gov.br</A>
       </FooterEsquerdo>
       <FooterDireito>
@@ -235,10 +266,10 @@ function Footer() {
           <p>passaporte@sctf.marica.rj.gov.br </p>
         </TagsFooter>
         <IconesFooter>
-          <VscTwitter className="custom-icon-vsc twitter"/>
-          <VscTwitter className="custom-icon-vsc twitter"/>
-          <VscTwitter className="custom-icon-vsc twitter"/>
-          <VscTwitter className="custom-icon-vsc twitter"/>
+          <IconeFooter href="#" aria-label="Facebook"><FaFacebook /></IconeFooter>
+          <IconeFooter href="#" aria-label="Twitter"><VscTwitter /></IconeFooter>
+          <IconeFooter href="#" aria-label="Instagram"><FaInstagram /></IconeFooter>
+          <IconeFooter href="#" aria-label="YouTube"><FaYoutube /></IconeFooter>
         </IconesFooter>
       </FooterDireito>
     </FooterContainer>
